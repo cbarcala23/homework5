@@ -1,7 +1,7 @@
 //far fa-save
 
-var today = moment().format('dddd, MMMM Do');
-$("#day").html(today);
+//Call function to show today's date in header
+showTodaysDate();
 
 //store global array for hour labels
 var hour = ["9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm"];
@@ -13,12 +13,13 @@ var timestamp = moment().format('H');
 //loop that builds out elements
 for (var i = 0; i <= 8; i++) {
 
-
+  //declare variables and create elements for html
   var table = $("#table");
   var row = $("<tr>", { 'class': 'row' });
   var time = $("<td>", { 'class': 'hour' }).html(hour[i]);
   var textbox = $("<textarea>").html("");
-  var save = $("<button>", { 'class': 'saveBtn'}).html("save");
+  var save = $("<button>", { 'class': 'saveBtn' }).html("save");
+  //append created telements, first to row, then row to the table div
   row.append(time, textbox, save);
   table.append(row);
 
@@ -26,11 +27,8 @@ for (var i = 0; i <= 8; i++) {
   //$(save).attr('id', "ID"+i);
   $(textbox).attr('id', "IDtext" + i);
 
-  var justhour = hour[i].replace(/\D/g, '');
-
   //Present Time Color Change
   if (starthour == timestamp) {
-    console.log(justhour, timestamp);
     $(textbox).addClass("present");
   }
   //Future Time Color Change
@@ -39,20 +37,20 @@ for (var i = 0; i <= 8; i++) {
   }
   //Past Time Color Change
   if (starthour < timestamp) {
-    console.log(justhour, timestamp);
     $(textbox).addClass("past");
   }
 
-  //get the data back from storage and place in textbox again
-  var dataAddedback = localStorage.getItem("value" + i);
-  $(textbox).text(dataAddedback);
+  //Call function to save the row info
+  saveRows();
 
   //increment starthour for next row to compare
   starthour++;
 
 }
 
+
 //Storage values of each text area
+//Need to figure out how to do this in one loop using variables, but did not get it working
 $('.saveBtn').click(function () {
   console.log(this.id);
   var inputtext = document.getElementById("IDtext0");
@@ -126,31 +124,15 @@ $('.saveBtn').click(function () {
 });
 
 
-
-// a.function to build scheduler Rows(function name buildRows) -> loop, moment.js(maybe)
-function buildRows() {
-
-}
-
-// b.set date at the top of the page(showTodaysDate) -> moment.js
+// FUNCTIONS
 function showTodaysDate() {
+  var today = moment().format('dddd, MMMM Do');
+  $("#day").html(today);
 
 }
 
-// c.save button event handler(function saverow) -> uses localstorage
 function saveRows() {
-
+  //get the data back from storage and place in textbox again
+  var dataAddedback = localStorage.getItem("value" + i);
+  $(textbox).text(dataAddedback);
 }
-
-// d.change row styles(function updateRowStyle) -> moment.js (update style for those that are past hours, present hour, future hours)
-
-function updateRowStyle() {
-
-}
-
-// i.on page load, check current time(hour) against rows in scheduler
-function getTime() {
-
-}
-
-//buildRows();
