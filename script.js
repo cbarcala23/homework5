@@ -1,4 +1,5 @@
-//far fa-save
+
+//<i class="fas fa-save"></i>
 
 //Call function to show today's date in header
 showTodaysDate();
@@ -18,7 +19,8 @@ for (var i = 0; i <= 8; i++) {
   var row = $("<tr>", { 'class': 'row' });
   var time = $("<td>", { 'class': 'hour' }).html(hour[i]);
   var textbox = $("<textarea>").html("");
-  var save = $("<button>", { 'class': 'saveBtn' }).html("save");
+  var save = $("<button>", { 'class': 'saveBtn' }).html("");
+  $(save).addClass("fas fa-save");
   //append created telements, first to row, then row to the table div
   row.append(time, textbox, save);
   table.append(row);
