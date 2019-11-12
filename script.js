@@ -18,7 +18,7 @@ for (var i = 0; i <= 8; i++) {
   var table = $("#table");
   var row = $("<tr>", { 'class': 'row' });
   var time = $("<td>", { 'class': 'hour' }).html(hour[i]);
-  var textbox = $("<textarea>").html("");
+  var textbox = $("<textarea>", { 'class': 'textarea' }).html("");
   var save = $("<button>", { 'class': 'saveBtn' }).html("");
   $(save).addClass("fas fa-save");
   //append created telements, first to row, then row to the table div
